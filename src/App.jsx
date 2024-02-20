@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import './App.css'
 import { BrowserRouter as Router,Routes,Route, Navigate } from 'react-router-dom';
 import Login from './components/Auth/Login';
-import Register from './components/Auth/Login';
+import Register from './components/Auth/Register';
 import Home from './components/Home/Home';
 import Jobs from './components/Job/Jobs';
 import JobDetails from './components/Job/JobDetails';
@@ -25,7 +25,7 @@ const App = () => {
   useEffect(()=>{
     const fetchUser = async()=>{
       try {
-        const response=await axios.get("",{withCredentials:true});
+        const response=await axios.get("http://localhost:4000/api/user/getUser",{withCredentials:true});
         setUser(response.data.user);
         setIsAuthorized(true)
       } catch (error) {
@@ -36,7 +36,7 @@ const App = () => {
 
   },[isAuthorized]);
 
- 
+
 
 
   return <>
@@ -46,7 +46,7 @@ const App = () => {
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/' element={<Home/>}/>
-      <Route path='/job/getAll' element={<Jobs/>}/>
+      <Route path='/job/getall' element={<Jobs/>}/>
       <Route path='/job/:id' element={<JobDetails/>}/>
       <Route path='/job/post' element={<PostJobs/>}/>
       <Route path='/job/me' element={<MyJobs/>}/>
